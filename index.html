@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario de Adviento</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 0;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      justify-content: center;
+      padding: 20px;
+    }
+    .day {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #ccc;
+      text-align: center;
+      line-height: 60px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+    .locked {
+      background-color: #ddd;
+      cursor: not-allowed;
+      color: #aaa;
+    }
+    .unlocked {
+      background-color: #fff;
+      color: #333;
+    }
+    #faceDisplay {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calendario de Adviento</h1>
+  <div class="calendar" id="calendar"></div>
+  <div id="faceDisplay"></div>
+
+  <script>
+    const faces = [
+      "😄", "🎅", "🌟", "❄️", "🎁", "⛄", "🍪", "🦌", "🎄", "🥳", "📜", "🧦",
+      "🔔", "🌠", "🍷", "🍫", "📯", "🕯️", "💝", "🌌", "🛷", "🎶", "🎉", "⭐"
+    ];
+
+    const calendar = document.getElementById('calendar');
+    const faceDisplay = document.getElementById('faceDisplay');
+    const today = new Date().getDate();
+
+    // Generar el calendario dinámicamente
+    for (let i = 1; i <= 24; i++) {
+      const dayBox = document.createElement('div');
+      dayBox.className = i <= today ? 'day unlocked' : 'day locked';
+      dayBox.textContent = i;
+
+      // Agregar evento al hacer clic
+      dayBox.addEventListener('click', () => {
+        if (i <= today) {
+          faceDisplay.textContent = `Hoy es el día ${i}: ${faces[i - 1]}`;
+        } else {
+          alert("¡Espera al día correspondiente!");
+        }
+      });
+
+      calendar.appendChild(dayBox);
+    }
+  </script>
+</body>
+</html>
